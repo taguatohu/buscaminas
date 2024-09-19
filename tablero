@@ -1,0 +1,27 @@
+// Simple Minesweeper logic
+const createMinesweeperGrid = (rows, cols, mines) => {
+  const grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+
+  // Randomly place mines
+  for (let i = 0; i < mines; i++) {
+    let placed = false;
+    while (!placed) {
+      const row = Math.floor(Math.random() * rows);
+      const col = Math.floor(Math.random() * cols);
+      if (grid[row][col] !== "X") {
+        grid[row][col] = "X";
+        placed = true;
+      }
+    }
+  }
+  return grid;
+};
+
+// Render the grid as a simple text output (could be used in Nightbot response)
+const renderGrid = (grid) => {
+  return grid.map(row => row.join(" ")).join("\n");
+};
+
+// Example: 5x5 grid with 5 mines
+const grid = createMinesweeperGrid(5, 5, 5);
+console.log(renderGrid(grid));
